@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="box">
+    <h1 class="title">Weather App</h1>
+    <div class="weather">
+     <input type="search" class="weather-search" placeholder="Your City">
+        <div class="weather-today">
+        <div class="weather-details">
+            <h2 class="weather-city">City </h2>
+            <p class="weather-day">Day</p>
+            <div class="weather-current">
+                <p class="weather-indicator-humidity"><span class="value"> Humidity- 0</span>%</p>
+                <p class="weather-indicator-wind"><span class="value">Wind- West, 0</span>m/s</p>
+                <p class="weather-indicator-pressure"><span class="value">Pressure- 0</span>hpa</p>
+            </div>
+        </div>
+        
+
+
+        <img src="assets/images/clear-sky.png" alt="Clear sky" class="weather-image">
+        <div class="weather-temperature"><span class="value">0</span> &deg;F</div>
+
+        </div> 
+        <br>
+       
+        <div class="weather-forecast">
+            <article class="weather-forecast-item">
+                <!-- <img src="assets/images/clear-sky.png" alt="Clear Sky" class="weather-forecast-icon">
+                <h3 class="weather-forecast-day">Day</h3> -->
+                <p class="weather-forecast-temperature"><span class="value">0</span> &deg;F</p>
+            </article>
+            
+           
+        </div>
+    </div>
+</div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
