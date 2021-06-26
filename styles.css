@@ -1,149 +1,111 @@
-@font-face {
-    font-family: 'Open Sans';
-    src: url(./assets/fonts/OpenSans.woff2) format('woff2'),
-    url(./assets/fonts/OpenSans.woff) format('woff');
+*{
+    box-sizing: border-box;
+}
+html, body  { 
+	height: 100%;
+	width: 100%;
+}
+h1 {
+    color:white;
+    font-size: 60px;
 }
 
-@font-face {
-    font-family: 'Open Sans';
-    src: url(./assets/fonts/OpenSans-Light.woff2) format('woff2'),
-    url(./assets/fonts/OpenSans-Light.woff) format('woff');
-    font-weight: 300;
+h2{
+    font-size: 40px;
 }
 
-@font-face {
-    font-family: 'Open Sans';
-    src: url(./assets/fonts/OpenSans-Semibold.woff2) format('woff2'),
-    url(./assets/fonts/OpenSans-Semibold.woff) format('woff');
-    font-weight: 600;
+h3{
+    font-size: 30px;
+    font-weight: bold;
+}
+img{
+    width: 200px;
+    height: 200px;
+    
 }
 
-@font-face {
-    font-family: 'Open Sans';
-    src: url(./assets/fonts/OpenSans-Bold.woff2) format('woff2'),
-    url(./assets/fonts/OpenSans-Bold.woff) format('woff');
-    font-weight: 700;
+article{
+    background-color: rgba(255, 255, 255, 0.308);
+    height:50px;
+    width:500px;
+    border-radius: 10px;
+}
+p{
+    font-size: 25px;
 }
 
 body {
-
-    width: 100%;
-    height: 100vh;
-    margin: 0;
     background-image: radial-gradient(circle, #1c7fc2 0%, #009cdc 28%, #0d9ade 32%, #011844 100%);
-    color:#fff;
-    font-family: Open OpenSans,  Arial, Helvetica, sans-serif;
-    font-weight: 300;
-    font-size: 26px;
 }
-
-.weather {
-width: 90%;
-height: 100%;
-margin: 0 auto;
-padding: 20px 0;
-box-sizing: border-box;
-white-space: nowrap;
-
-}
-
-.weather-search {
-width:100%;
-padding: 15px 10px;
-border:none;
-background-color: rgba(255, 255, 255, 0.15);
-font-size: 25px;
-color:inherit;
-margin-bottom: 20px;
-border-radius: 6px;
-}
-
-.weather-search::placeholder {
-    color:#fff;
-    text-align: left;
-}
-
-.weather-today {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-.weather-image{
-width: 30vmin;
-align-self: center;
-
-}
-.weather-city{
-
-font-size: 36px;
-font-weight: 600;
-margin: 20px 0;
-}
-
-.weather-day {
-    font-size: 30px;
-    margin: 10px 0;
-    font-weight:400;
-}
-
-.weather-indicator::before {
-    content: "";
-    display:inline-block;
-    vertical-align: middle;
-    width:30px;
-    height: 30px;
-    background-size: cover;
-    margin-right: 10px;
-}
-
-
-.weather-temperature{
-    font-size: 60px;
-    flex-wrap: wrap;
-}
-
-.weather-forecast {
-    width:100%;
-    height:600px;
-    text-align: center;
-    display:flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    display:inline-block;
-    background-color: transparent;
-    flex-wrap: wrap;
-}
-
-.weather-forecast-icon{
-    margin-top: 100px;
-    /* max-width: 50%; */
-    /* width:300px; */
-    /* height: 300px; */
-    flex-wrap: wrap;
-}
-
-.weather-forecast-item {
-    background-color: rgba(255, 255,255, 0.2);
-    border-radius: 10px;
-    /* margin: 0 5px 5px; */
-    flex-direction: row;
-    box-sizing: content-box;
-    min-width: 60px;
-    min-height: 60px;
-    display:inline-block;
-    flex-grow: 1;
-   flex-wrap: wrap;
-}
-
-h1 {
-    font-size: 60px;
+.currentDay{
     font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin-left: 60px;
-    flex-wrap: wrap;
+    font-size: 32px;
+}
+.weatherTemp{
+    font-size: 40px;
+    font-weight: bold;
 }
 
-article {
-    background-color: transparent;
-    flex-wrap: wrap;
-}
+.searchBar {
+    width:30%;
+    padding: 15px 10px;
+    border:none;
+    background-color: rgba(255, 255, 255, 0.308);
+    font-size: 40px;
+    color:inherit;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    color:#fff;
+    margin-left: 15px;
+    }
+
+    .searchBar::placeholder {
+        color:#fff;
+        text-align: left;
+    }
+
+    
+    .weatherDetails{
+        background-color: rgba(255, 255, 255, 0.308);
+        width: 30%;
+        border-radius: 10px;
+        margin-left: 3px;
+        padding-left: 8px;
+        padding-bottom: 3px;
+        display: flexbox;
+        float: left;
+    }
+
+    .fiveDayForecast {
+        background-color: transparent;
+        border-radius: 10px;
+        width:30%;
+        float: right;
+        padding: 5px;
+        margin-bottom: 20px;
+        align-items: center;
+        text-align: center;
+    }
+
+    
+
+    .weatherForecast{
+        height: 20%;
+    }
+
+    .weatherBox{
+        margin-left: 10px;
+    }
+
+    .savedLocations{
+        width:30%;
+        padding: 15px 10px;
+        border:none;
+        background-color: rgba(255, 255, 255, 0.308);
+        font-size: 20px;
+        color:inherit;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        margin-left: 15px;
+        
+    }
