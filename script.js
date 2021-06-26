@@ -1,61 +1,22 @@
-let searchInput = document.querySelector('.weather-search');
+let searchInput = document.querySelector('.searchBar');
+let city = document.querySelector('.locationCity');
+let day = document.querySelector('.currentDay');
+let humidity = document.querySelector('.humidityValue>.value');
+let wind = document.querySelector('.windValue>.value');
+let pressure = document.querySelector('.pressureValue>.value');
+let image = document.querySelector('.weatherImg');
+let temperature = document.querySelector('.weatherTemp>.value');
+let forecastBlock = document.querySelector('.weatherForecast');
+let weatherIcons = [];
 
-let city = document.querySelector('.weather-city');
-let day = document.querySelector('.weather-day');
-let humidity = document.querySelector('.weather-indicator-humidity>.value');
-let wind = document.querySelector('.weather-indicator-wind>.value');
-let pressure = document.querySelector('.weather-indicator-pressure>.value');
-let image = document.querySelector('.weather-image');
-let temperature = document.querySelector('.weather-temperature>.value');
-let forecastBlock = document.querySelector('.weather-forecast-item');
-let weatherIcons = [
-    {
-        url:'images/clear-sky.png',
-        ids: [800]
-    },
-    {
-        url:'images/broken-clouds.png',
-        ids: [803, 804]
-    },
-    {
-        url:'images/few-clouds.png',
-        ids: [801]
-    },
-    {
-        url:'images/mist.png',
-        ids: [701, 711, 7221, 731, 741, 751, 761, 771, 781]
-    },
-    
-    {
-        url:'images/rain.png',
-        ids: [500, 501, 502, 503, 504]
-    },
-    {
-        url:'images/scattered-clouds.png',
-        ids: [802]
-    },
-    {
-        url:'images/shower-rain.png',
-        ids: [520, 521, 522, 531, 300, 301, 302, 310, 311, 312, 313, 314, 321]
-    },
-    {
-        url:'images/snow.png',
-        ids: [511, 600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622]
-    },
-    {
-        url:'images/thunderstorm.png',
-        ids: [200, 201, 202, 210, 211, 212, 221, 230, 231, 232]
-    }
-]
-let weatherAPIKey = '9216ab8b22adbecee9cb35d8e2cc554b';
 
-let weatherBasedEndPoint = 'https://api.openweathermap.org/data/2.5/weather?units=imperial&appid=' + weatherAPIKey;
-let forecastBaseEndPoint = 'https://api.openweathermap.org/data/2.5/forecast?units=imperial&appid=' + weatherAPIKey;
+let currentWeatherEndPoint = 'https://api.openweathermap.org/data/2.5/weather?units=imperial&appid=' + '9216ab8b22adbecee9cb35d8e2cc554b';
+let fiveDayForecastEndPoint = 'https://api.openweathermap.org/data/2.5/forecast?units=imperial&appid=' + '9216ab8b22adbecee9cb35d8e2cc554b';
 
-// Retrieve Weather By City Name
+// Retrieve Weather By search Bar
 
-let getWeatherByCityName = async (city) => {
-let endpoint = weatherBasedEndPoint + '&q=' + city;
+let getCurrentWeather = async (city) => {
+let endpoint = currentWeatherEndPoint + '&q=' + city;
 let response = await fetch(endpoint);
 let weather = await response.json();
 
@@ -65,8 +26,8 @@ return weather;
 
 // Forecast By the City ID
 
-let getForecastByCityId = async (id) => {
-    let endpoint = forecastBaseEndPoint + '&id=' + id;
+let getForecastID = async (id) => {
+    let endpoint = fiveDayForecastEndPoint + '&id=' + id;
     let result = await fetch(endpoint);
     let forecast =  await result.json();
     let forecastList = forecast.list;
@@ -85,11 +46,11 @@ let getForecastByCityId = async (id) => {
 
 searchInput.addEventListener('keydown', async (e) => {
 if(e.keyCode === 13) {
-    let weather = await getWeatherByCityName(searchInput.value);
+    let weather = await getCurrentWeather(searchInput.value);
     let cityID = weather.id;
     updateCurrentWeather(weather);
-    let forecast = await getForecastByCityId(cityID);
-    updateForecast(forecast);
+    let forecast = await getForecastID(cityID);
+    fiveDayForecast(forecast);
 }
 
 })
@@ -97,58 +58,59 @@ if(e.keyCode === 13) {
 // Current Weather
 
 let updateCurrentWeather =(data) => {
-    console.log(data);
+  
     city.textContent = data.name + ', ' + data.sys.country;
-    day.textContent = dayOFWeek();
-    humidity.textContent = 'Humidity- ' + data.main.humidity;
-    pressure.textContent = 'Pressure- ' +data.main.pressure;
+    day.textContent = weekDay();
+    humidity.textContent = ' ' + data.main.humidity;
+    pressure.textContent = ' ' +data.main.pressure;
     let windDirection;
     let deg = data.wind.deg;
     if(deg > 45 && deg <= 135){
-        windDirection = 'Wind - East';
+        windDirection = ' East';
     } else if(deg >135 && deg<=225){
-        windDirection = 'Wind - South';
+        windDirection = ' South';
     }else if(deg >225 && deg<=315){
-        windDirection = 'Wind - West';
+        windDirection = ' West';
     }else {
-        windDirection = 'Wind - North';
+        windDirection = ' North';
     }
     wind.textContent = windDirection + ', ' + data.wind.speed;
     temperature.textContent = data.main.temp > 0 ? '+' + Math.round(data.main.temp) : 
         Math.round(data.main.temp);
 
-        let imgID = data.weather[0].id;
+        let imageID = data.weather[0].id;
         weatherIcons.forEach(obj => {
-            if(obj.ids.includes(imgID)){
+            if(obj.ids.includes(imageID)){
                 image.src = obj.url;
             }
         })
 }
 
-let dayOFWeek = (dt = new Date().getTime()) => {
+let weekDay = (dt = new Date().getTime()) => {
     return new Date(dt).toLocaleDateString('en-EN', {'weekday': 'long'});
  }
 
-// Updating 5 Day Forecast
 
-let updateForecast = (forecast) => {
+ // Updating 5 Day Forecast
+
+let fiveDayForecast = (forecast) => {
     forecastBlock.innerHTML = '';
     forecast.forEach(day => {
         let iconUrl = 'https://openweathermap.org/img/wn/' + day.weather[0].icon + '@2x.png';
-        let dayName = dayOFWeek(day.dt *1000);
+        let dayWeek = weekDay(day.dt *1000);
         let temperature = day.main.temp > 0 ? 
                     '+' + Math.round(day.main.temp) : 
                     Math.round(day.main.temp);
 
-        let forecastItem = `
-            <article class="weather-forecast-item">
-                <img src="${iconUrl}" alt="${day.weather[0].description}" class="weather-forecast-icon">
-                <h3 class="weather-forecast-day">${dayName}</h3>
-                <p class="weather-forecast-temperature"><span class="value">${temperature}</span> &deg;F</p>
+        let fiveDayResult = `
+            <article class="weatherForecast">
+                <img src="${iconUrl}" alt="${day.weather[0].description}" class="weatherImg">
+                <h2>${dayWeek}</h2>
+                <p>${temperature}</> &deg;F</p>
             </article>
 
         `;
-        forecastBlock.insertAdjacentHTML('beforeend', forecastItem);
+        forecastBlock.insertAdjacentHTML('beforeend', fiveDayResult);
     })
 }
 
