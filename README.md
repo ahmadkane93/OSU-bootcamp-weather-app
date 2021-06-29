@@ -1,5 +1,5 @@
 # OSU-bootcamp-weather-app
- <img src=/readme-weather.jpg/>
+ <img src=/weatherapp-readme.jpg/>
 <br>
 <br>
 <br>
@@ -23,8 +23,8 @@ https://github.com/ahmadkane93/OSU-bootcamp-weather-app
 <li>Type your city location and then click "enter".</li>
 <li>View the current day forecast and five day forecast.</li>
 <br>
-<img src=/readme-current-day.jpg/>
-<img src=/readme-5-day-forecast.jpg/>
+
+<img src=/weather-app-video.gif/>
 <br>
 <br>
 
